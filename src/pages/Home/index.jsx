@@ -1,8 +1,12 @@
-//import styles from './Home.module.css';
+import styles from './Home.module.css';
 
 const Home = () => {
   return (
-    <div>Home</div>
+    <div className={styles.home}>
+
+    <h1> Home </h1>
+      
+    </div>
   )
 }
 
