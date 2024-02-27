@@ -1,10 +1,10 @@
 import styles from './Register.module.css';
 
 
-export default const Register = () => {
+const Register = () => {
   return (
-    <div>
-        <h2>Register</h2>
-    </div>
+    <div>Register</div>
   )
 }
+
+export default Register
