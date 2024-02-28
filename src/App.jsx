@@ -1,7 +1,15 @@
+//Estilo
 import './App.css';
 
+//React e Firebase
 import { BrowserRouter,Routes, Route,Navigate } from 'react-router-dom';
+import { onAuthStateChanged } from 'firebase/auth';
 
+//Hooks
+import { useState, useEffect } from 'react';
+import { useAuth } from './hooks/useAuth';
+
+//Contexto
 import { AuthProvider } from './context/AuthContext';
 
 //pages
@@ -13,22 +21,39 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 
 function App() {
+
+  const [user,setUser] = useState(undefined);
+  const {auth} = useAuth();
+
+  const loadingUser = user === undefined;
+
+  useEffect(() => {
+    onAuthStateChanged(auth,(user) => {
+      setUser(user)
+    })
+  },[auth]);
+
+
+  if(loadingUser) {
+    return <p>Carregando...</p>
+  }
+
   return (
     <div className="App">
          
    <AuthProvider>
-   <BrowserRouter>
-   <Navbar/>
-   <div className='Container'>
-      <Routes>
-        <Route exact path='/' element={<Home/>}/>
-        <Route path='/about' element={<About/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/register' element={<Register/>}/>
-      </Routes>
-      </div>
-      <Footer/>
-    </BrowserRouter>
+    <BrowserRouter>
+    <Navbar/>
+    <div className='Container'>
+        <Routes>
+          <Route exact path='/' element={<Home/>}/>
+          <Route path='/about' element={<About/>}/>
+          <Route path='/login' element={<Login/>}/>
+          <Route path='/register' element={<Register/>}/>
+        </Routes>
+        </div>
+        <Footer/>
+      </BrowserRouter>
    </AuthProvider>
 
     </div>
