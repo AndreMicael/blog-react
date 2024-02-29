@@ -1,10 +1,13 @@
-import styles from './Login.module.css';
 
-import React from 'react'
+
+
 
 const Login = () => {
   return (
-    <div>Login</div>
+    <div>
+    
+       <h1>Login</h1>
+    </div>
   )
 }
 
